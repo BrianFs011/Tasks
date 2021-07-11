@@ -1,11 +1,12 @@
 import React,{Component} from 'react';
 import {View, Text, ImageBackground, StyleSheet} from 'react-native';
 
-import moment from 'moment'
-import 'moment/locale/pt-br'
+import moment from 'moment';
+import 'moment/locale/pt-br';
 
-import todayImage from '../../assets/imgs/today.jpg'
-import commonStyles from '../styles/commonStyles' 
+import todayImage from '../../assets/imgs/today.jpg';
+import commonStyles from '../styles/commonStyles';
+import Task from '../components/Task'
 
 export default class TaskList extends Component{
   render(){
@@ -19,9 +20,8 @@ export default class TaskList extends Component{
           </View>
         </ImageBackground>
         <View style={styles.taskList}>
-          <Text> TaskList </Text>
-          <Text> TaskList </Text>
-          <Text> TaskList </Text>
+          <Task desc='Comprar mouse' estimateAt={new Date()} doneAt={new Date()}/>
+          <Task desc='chegar mouse' estimateAt={new Date()} doneAt={null}/>
         </View>
       </View>
     )
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   subTitle:{
-    fontFamily: commonStyles.fontFamily,
+    fontFamily:  commonStyles.fontFamily,
     color: commonStyles.colors.secondary,
     fontSize: 20,
     marginLeft: 20,
