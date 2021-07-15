@@ -1,10 +1,12 @@
 import React from 'react';
-import {View,Text, StyleSheet, TouchableWithoutFeedback} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {View,Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity} from 'react-native';
 
-import commonStyles from '../styles/commonStyles';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 import 'moment/locale/pt-br';
+import Swipeable from 'react-native-gesture-handler/Swipeable'
+
+import commonStyles from '../styles/commonStyles';
 
 export default (props)=>{
 
@@ -14,18 +16,28 @@ export default (props)=>{
 
   const formattedDateDate =moment(date).locale('pt-br').format('ddd, D [de] MMMM')
 
+  const getRightContent = ()=> {
+    return (
+      <TouchableOpacity style={styles.reght}>
+        <Icon name="trash" size={30} color="#fff" />
+      </TouchableOpacity>
+    )
+  }
+
   return(
-    <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={()=>props.toggleTask(props.id)}>
-        <View style={styles.checkContainer}>
-          {getCheckView(props.doneAt)}
+    <Swipeable renderRightActions={getRightContent}>
+      <View style={styles.container}>
+        <TouchableWithoutFeedback onPress={()=>props.toggleTask(props.id)}>
+          <View style={styles.checkContainer}>
+            {getCheckView(props.doneAt)}
+          </View>
+        </TouchableWithoutFeedback>
+        <View>
+          <Text style={[styles.desc, doneOrNotStyle]}>{props.desc}</Text>
+          <Text style={styles.date}>{formattedDateDate}</Text>
         </View>
-      </TouchableWithoutFeedback>
-      <View>
-        <Text style={[styles.desc, doneOrNotStyle]}>{props.desc}</Text>
-        <Text style={styles.date}>{formattedDateDate}</Text>
       </View>
-    </View>
+    </Swipeable>
   )
 }
 
@@ -82,5 +94,12 @@ const styles = StyleSheet.create({
     fontFamily: commonStyles.fontFamily,
     color: commonStyles.colors.subText,
     fontSize: 12,
+  },
+  right:{
+    backgroundColor: 'red',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    paddingHorizontal: 20,
   }
 })

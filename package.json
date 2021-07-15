@@ -12,11 +12,15 @@
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.5",
     "@react-native-community/datetimepicker": "^3.5.2",
+    "adb": "^0.2.0",
     "lato-font": "^3.0.0",
     "moment": "^2.29.1",
     "react": "17.0.1",
     "react-native": "0.64.2",
-    "react-native-vector-icons": "^8.1.0"
+    "react-native-cli": "^2.0.1",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-vector-icons": "^8.1.0",
+    "scrcpy": "^1.1.6"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
