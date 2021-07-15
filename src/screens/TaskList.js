@@ -27,7 +27,7 @@ export default class TaskList extends Component{
     },
     {
       id: Math.random(),
-      desc: 'Comprar Livro React-Native',
+      desc: 'Comprar mais um Livro React-Native',
       estimateAt: new Date(),
       doneAt:null,
     }]
@@ -80,6 +80,11 @@ export default class TaskList extends Component{
     this.setState({tasks, showAddTask: false}, this.filterTasks)
   }
 
+  deleteTask = id => {
+    const tasks = this.state.tasks.filter(task => task.id !== id)
+    this.setState({tasks}, this.filterTasks)
+  }
+
   render(){
     const today = moment().locale('pr-br').format('ddd, D [de] MMMM')
     return(
@@ -99,7 +104,7 @@ export default class TaskList extends Component{
         <View style={styles.taskList}>
           <FlatList data={this.state.visibleTasks} 
           keyExtractor={(item) => `${item.id}`} 
-          renderItem={({item})=> <Task {...item} toggleTask={this.toggleTask}/> } />
+          renderItem={({item})=> <Task {...item} onToggleTask={this.toggleTask} onDelete={this.deleteTask}/> } />
         </View>
         <TouchableOpacity style={styles.addButton} onPress={()=>{this.setState({showAddTask: true})}} activeOpacity={0.7}>
           <Icon name='plus' size={20} color={commonStyles.colors.secondary}/>
